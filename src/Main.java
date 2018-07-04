@@ -1,64 +1,143 @@
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-
-        String csvFile = "src/listMovie.csv";
+        baner();
         BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ";";
 
+        System.out.println("DOKONAJ WYBORU");
+        System.out.println("                                              ");
+        System.out.println("(1) Wyświetl listę filmów dostępnych w wypożyczalni");
+        System.out.println("                                              ");
+        System.out.print("Podaj liczbę odpowiadającą wybranej funkcji: ");
 
-        try {
-            long countOfLines = Files.lines(Paths.get(new File(csvFile).getPath())).count();
+        Scanner scanner = new Scanner(System.in);
+        int selection = scanner.nextInt();
 
-            Store store = new Store ((int) countOfLines - 1);
+        if (selection == 1) {
+            try {
+                String csvFile = "src/listMovie.csv";
 
-            br = new BufferedReader(new FileReader(csvFile));
+                long countOfLines = Files.lines(Paths.get(new File(csvFile).getPath())).count();
 
-            boolean skipFirtLine = true;
-            int currentLine = 0;
-            while ((line = br.readLine()) != null) {
-                if (skipFirtLine) {
-                    skipFirtLine = false;
-                    continue;
+                Store store = new Store ((int) countOfLines - 1);
+
+                br = new BufferedReader(new FileReader(csvFile));
+
+                boolean skipFirtLine = true;
+                int currentLine = 0;
+                while ((line = br.readLine()) != null) {
+                    if (skipFirtLine) {
+                        skipFirtLine = false;
+                        continue;
+                    }
+
+                    String[] string = line.split(cvsSplitBy);
+
+                    Movie movie = new Movie(
+                            string[0].trim(),
+                            string[1].trim(),
+                            string[2].trim(),
+                            Integer.parseInt(string[3].trim()),
+                            string[4].trim(),
+                            string[5].trim());
+
+                    store.addMovie(movie, currentLine);
+                    currentLine++;
+
                 }
 
-                String[] string = line.split(cvsSplitBy);
+                store.showStore();
 
-                Movie movie = new Movie(
-                        string[0].trim(),
-                        string[1].trim(),
-                        string[2].trim(),
-                        Integer.parseInt(string[3].trim()),
-                        string[4].trim(),
-                        string[5].trim());
-
-                store.addMovie(movie, currentLine);
-                currentLine++;
-
-            }
-
-            store.showStore();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (br != null) {
+                    try {
+                        br.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
-        }
+        }/*else if (selection == 2){
+            try {
+                String csvFile = "src/customersList.csv";
+
+                long countOfLines = Files.lines(Paths.get(new File(csvFile).getPath())).count();
+
+                Store store = new Store ((int) countOfLines - 1);
+
+                br = new BufferedReader(new FileReader(csvFile));
+
+                boolean skipFirtLine = true;
+                int currentLine = 0;
+                while ((line = br.readLine()) != null) {
+                    if (skipFirtLine) {
+                        skipFirtLine = false;
+                        continue;
+                    }
+
+                    String[] string = line.split(cvsSplitBy);
+
+                    Customers customers = new Customers(
+                            string[0].trim(),
+                            string[1].trim(),
+                            string[2].trim(),
+                            Integer.parseInt(string[3].trim()),
+                            string[4].trim(),
+                            string[5].trim());
+
+                    store.addCustomers(customers, currentLine);
+                    currentLine++;
+
+                }
+
+                store.showStore();
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (br != null) {
+                    try {
+                        br.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }*/
 
 
+    }
+
+    private static void baner() {
+        System.out.println("                                              ");
+        System.out.println("==============================================");
+        System.out.println("==      Program dla wypożyczalni video      ==");
+        System.out.println("==              MOVIESTORE 1.0              ==");
+        System.out.println("==============================================");
+        System.out.println("==                Wykonali:                 ==");
+        System.out.println("==      mł.asp. Marcin Brzeziński           ==");
+        System.out.println("==         asp. Sylwester Brożyna           ==");
+        System.out.println("==      st.asp. Piotr Bąkiewicz             ==");
+        System.out.println("==============================================");
+        System.out.println("                                              ");
+        System.out.println("                                              ");
+        System.out.println("                                              ");
     }
 
 }
