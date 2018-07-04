@@ -44,8 +44,8 @@ public class Movie {
         System.out.println("Długość filmu: " + lenght);
     }
 
-    public boolean checkTitle(String tytul) {
-        return this.title == tytul;
+    public boolean checkTitle(String title) {
+        return this.title == title;
     }
 
 }
