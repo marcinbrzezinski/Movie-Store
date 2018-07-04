@@ -1,23 +1,23 @@
 public class Movie {
-    private String director;
     private String title;
+    private String director;
     private String category;
-    private String production;
     private int year;
-    private int lenght;
+    private String production;
+    private String time;
 
-    Movie(String director,
-            String title,
+    Movie(String title,
+            String director,
             String category,
-            String production,
             int year,
-            int lenght) {
-        this.director = director;
+            String production,
+            String time){
         this.title = title;
+        this.director = director;
         this.category = category;
-        this.production = production;
         this.year = year;
-        this.lenght = lenght;
+        this.production = production;
+        this.time = time;
         this.rented = false;
     }
 
@@ -41,7 +41,7 @@ public class Movie {
         System.out.println("Kategoria: " + category);
         System.out.println("Produkcja: " + production);
         System.out.println("Rok: " + year);
-        System.out.println("Długość filmu: " + lenght);
+        System.out.println("Długość filmu: " + time);
     }
 
     public boolean checkTitle(String title) {
