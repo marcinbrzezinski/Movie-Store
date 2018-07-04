@@ -1,13 +1,26 @@
 public class Store {
 
+
+    private Customers[] customersList;
     private Movie[] moviesList;
 
     Store(int value) {
         moviesList = new Movie[value];
+        customersList = new Customers[value];
     }
 
+    void addCustomers(Customers customers, int index){
+        customersList[index] = customers;
+    }
     void addMovie(Movie movie, int index) {
         moviesList[index] = movie;
+    }
+
+    public void showCustomers() {
+        for (int i = 0; i < customersList.length; i++) {
+            customersList[i].showCustomers();
+            System.out.println();
+        }
     }
 
     public void showStore() {
