@@ -59,26 +59,7 @@ public class Main {
 
                 boolean skipFirtLine = true;
                 int currentLine = 0;
-                while ((line = br.readLine()) != null) {
-                    if (skipFirtLine) {
-                        skipFirtLine = false;
-                        continue;
-                    }
-
-                    String[] string = line.split(cvsSplitBy);
-
-                    Customers customers = new Customers(
-                            string[0].trim(),
-                            string[1].trim(),
-                            Integer.parseInt(string[2].trim()),
-                            string[3].trim(),
-                            Integer.parseInt(string[4].trim()),
-                            string[5].trim());
-
-                    store.addCustomers(customers, currentLine);
-                    currentLine++;
-
-                }
+                customerInfo(br, cvsSplitBy, store, skipFirtLine, currentLine);
 
                 store.showCustomers();
 
@@ -110,9 +91,11 @@ public class Main {
                 int currentLine = 0;
                 load(br, cvsSplitBy, store, skipFirtLine, currentLine);
 
+                System.out.print("Podaj ID wybranego filmu: ");
                 Scanner movieSel = new Scanner(System.in);
                 int movieNumber = scanner.nextInt();
 
+                store.showMov(movieNumber - 1);
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -129,9 +112,66 @@ public class Main {
             }
 
 
+        }else if (selection == 4){
+            try {
+                String csvFile = "src/customers.csv";
+
+                long countOfLines = Files.lines(Paths.get(new File(csvFile).getPath())).count();
+
+                Store store = new Store ((int) countOfLines - 1);
+
+                br = new BufferedReader(new FileReader(csvFile));
+
+                boolean skipFirtLine = true;
+                int currentLine = 0;
+                customerInfo(br, cvsSplitBy, store, skipFirtLine, currentLine);
+
+                System.out.print("Podaj ID klienta: ");
+                Scanner customerSel = new Scanner(System.in);
+                int customerNumber = scanner.nextInt();
+
+                store.showCustomer(customerNumber - 1);
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (br != null) {
+                    try {
+                        br.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
 
 
+    }
+
+    private static void customerInfo(BufferedReader br, String cvsSplitBy, Store store, boolean skipFirtLine, int currentLine) throws IOException {
+        String line;
+        while ((line = br.readLine()) != null) {
+            if (skipFirtLine) {
+                skipFirtLine = false;
+                continue;
+            }
+
+            String[] string = line.split(cvsSplitBy);
+
+            Customers customers = new Customers(
+                    string[0].trim(),
+                    string[1].trim(),
+                    Integer.parseInt(string[2].trim()),
+                    string[3].trim(),
+                    Integer.parseInt(string[4].trim()),
+                    string[5].trim());
+
+            store.addCustomers(customers, currentLine);
+            currentLine++;
+
+        }
     }
 
     private static void load(BufferedReader br, String cvsSplitBy, Store store, boolean skipFirtLine, int currentLine) throws IOException {
@@ -164,6 +204,7 @@ public class Main {
         System.out.println("(1) Wyświetl listę filmów dostępnych w wypożyczalni");
         System.out.println("(2) Wyświetl listę klientów wypożyczalni");
         System.out.println("(3) Wybierz film");
+        System.out.println("(4) Wybierz klienta");
         System.out.println("                                              ");
         System.out.print("Podaj liczbę odpowiadającą wybranej funkcji: ");
     }

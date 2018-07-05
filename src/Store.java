@@ -16,11 +16,23 @@ public class Store {
         moviesList[index] = movie;
     }
 
+    public void showCustomer(int i) {
+
+        customersList[i].showCustomers();
+        System.out.println();
+    }
+
     public void showCustomers() {
         for (int i = 0; i < customersList.length; i++) {
             customersList[i].showCustomers();
             System.out.println();
         }
+    }
+
+    public void showMov(int i) {
+
+            moviesList[i].showMovie();
+            System.out.println();
     }
 
     public void showStore() {
