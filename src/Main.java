@@ -13,137 +13,141 @@ public class Main {
         String line = "";
         String cvsSplitBy = ";";
 
-        menu();
+        while (true) {
+            menu();
 
-        Scanner scanner = new Scanner(System.in);
-        int selection = scanner.nextInt();
+            Scanner scanner = new Scanner(System.in);
+            int selection = scanner.nextInt();
 
-        if (selection == 1) {
-            try {
-                String csvFile = "src/listMovie.csv";
+            if (selection == 1) {
+                try {
+                    String csvFile = "src/listMovie.csv";
 
-                long countOfLines = Files.lines(Paths.get(new File(csvFile).getPath())).count();
+                    long countOfLines = Files.lines(Paths.get(new File(csvFile).getPath())).count();
 
-                Store store = new Store ((int) countOfLines - 1);
+                    Store store = new Store ((int) countOfLines - 1);
 
-                br = new BufferedReader(new FileReader(csvFile));
+                    br = new BufferedReader(new FileReader(csvFile));
 
-                boolean skipFirtLine = true;
-                int currentLine = 0;
-                load(br, cvsSplitBy, store, skipFirtLine, currentLine);
+                    boolean skipFirtLine = true;
+                    int currentLine = 0;
+                    load(br, cvsSplitBy, store, skipFirtLine, currentLine);
 
-                store.showStore();
+                    store.showStore();
 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (br != null) {
-                    try {
-                        br.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (br != null) {
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-            }
-        }else if (selection == 2){
-            try {
-                String csvFile = "src/customers.csv";
+            }else if (selection == 2){
+                try {
+                    String csvFile = "src/customers.csv";
 
-                long countOfLines = Files.lines(Paths.get(new File(csvFile).getPath())).count();
+                    long countOfLines = Files.lines(Paths.get(new File(csvFile).getPath())).count();
 
-                Store store = new Store ((int) countOfLines - 1);
+                    Store store = new Store ((int) countOfLines - 1);
 
-                br = new BufferedReader(new FileReader(csvFile));
+                    br = new BufferedReader(new FileReader(csvFile));
 
-                boolean skipFirtLine = true;
-                int currentLine = 0;
-                customerInfo(br, cvsSplitBy, store, skipFirtLine, currentLine);
+                    boolean skipFirtLine = true;
+                    int currentLine = 0;
+                    customerInfo(br, cvsSplitBy, store, skipFirtLine, currentLine);
 
-                store.showCustomers();
+                    store.showCustomers();
 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (br != null) {
-                    try {
-                        br.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (br != null) {
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-            }
 
-        }else if(selection == 3){
-            try {
-                String csvFile = "src/listMovie.csv";
+            }else if(selection == 3){
+                try {
+                    String csvFile = "src/listMovie.csv";
 
-                long countOfLines = Files.lines(Paths.get(new File(csvFile).getPath())).count();
+                    long countOfLines = Files.lines(Paths.get(new File(csvFile).getPath())).count();
 
-                Store store = new Store ((int) countOfLines - 1);
+                    Store store = new Store ((int) countOfLines - 1);
 
-                br = new BufferedReader(new FileReader(csvFile));
+                    br = new BufferedReader(new FileReader(csvFile));
 
-                boolean skipFirtLine = true;
-                int currentLine = 0;
-                load(br, cvsSplitBy, store, skipFirtLine, currentLine);
+                    boolean skipFirtLine = true;
+                    int currentLine = 0;
+                    load(br, cvsSplitBy, store, skipFirtLine, currentLine);
 
-                System.out.print("Podaj ID wybranego filmu: ");
-                Scanner movieSel = new Scanner(System.in);
-                int movieNumber = scanner.nextInt();
+                    System.out.print("Podaj ID wybranego filmu: ");
+                    Scanner movieSel = new Scanner(System.in);
+                    int movieNumber = scanner.nextInt();
 
-                store.showMov(movieNumber - 1);
+                    store.showMov(movieNumber - 1);
 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (br != null) {
-                    try {
-                        br.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (br != null) {
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-            }
 
 
-        }else if (selection == 4){
-            try {
-                String csvFile = "src/customers.csv";
+            }else if (selection == 4){
+                try {
+                    String csvFile = "src/customers.csv";
 
-                long countOfLines = Files.lines(Paths.get(new File(csvFile).getPath())).count();
+                    long countOfLines = Files.lines(Paths.get(new File(csvFile).getPath())).count();
 
-                Store store = new Store ((int) countOfLines - 1);
+                    Store store = new Store ((int) countOfLines - 1);
 
-                br = new BufferedReader(new FileReader(csvFile));
+                    br = new BufferedReader(new FileReader(csvFile));
 
-                boolean skipFirtLine = true;
-                int currentLine = 0;
-                customerInfo(br, cvsSplitBy, store, skipFirtLine, currentLine);
+                    boolean skipFirtLine = true;
+                    int currentLine = 0;
+                    customerInfo(br, cvsSplitBy, store, skipFirtLine, currentLine);
 
-                System.out.print("Podaj ID klienta: ");
-                Scanner customerSel = new Scanner(System.in);
-                int customerNumber = scanner.nextInt();
+                    System.out.print("Podaj ID klienta: ");
+                    Scanner customerSel = new Scanner(System.in);
+                    int customerNumber = scanner.nextInt();
 
-                store.showCustomer(customerNumber - 1);
+                    store.showCustomer(customerNumber - 1);
 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (br != null) {
-                    try {
-                        br.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    if (br != null) {
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
+            }else if (selection == 0){
+                break;
             }
         }
 
@@ -205,6 +209,7 @@ public class Main {
         System.out.println("(2) Wyświetl listę klientów wypożyczalni");
         System.out.println("(3) Wybierz film");
         System.out.println("(4) Wybierz klienta");
+        System.out.println("(0) WYJDŹ Z PROGRAMU");
         System.out.println("                                              ");
         System.out.print("Podaj liczbę odpowiadającą wybranej funkcji: ");
     }
